@@ -39,5 +39,8 @@ module InstagramClone
 
     config.time_zone = 'Tokyo' # Railsアプリケーション自体のタイムゾーンを東京時間に指定
     config.active_record.default_timezone = :local # DB読み書きの際に使うタイムゾーンをOSのタイムゾーンに指定
+
+    config.i18n.default_locale = :ja # デフォルトのlocaleを日本語に指定
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s] # 複数のlocalファイルを読み込まれるよう設定
   end
 end
