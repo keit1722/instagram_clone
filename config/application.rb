@@ -29,5 +29,12 @@ module InstagramClone
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.generators do |g|
+      g.skip_routes true # ルーティングを自動生成しない
+      g.assets false # CSS、JavaScriptファイルを自動生成しない
+      g.helper false # helperファイルを自動生成しない
+      g.test_framework false # testファイルを自動生成しない
+    end
   end
 end
