@@ -36,5 +36,8 @@ module InstagramClone
       g.helper false # helperファイルを自動生成しない
       g.test_framework false # testファイルを自動生成しない
     end
+
+    config.time_zone = 'Tokyo' # Railsアプリケーション自体のタイムゾーンを東京時間に指定
+    config.active_record.default_timezone = :local # DB読み書きの際に使うタイムゾーンをOSのタイムゾーンに指定
   end
 end
