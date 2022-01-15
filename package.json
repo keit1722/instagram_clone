@@ -2,6 +2,7 @@
   "name": "instagram_clone",
   "private": true,
   "dependencies": {
-    "bootstrap-material-design": "4.1.1"
+    "bootstrap-material-design": "4.1.1",
+    "swiper": "^7.4.1"
   }
 }
