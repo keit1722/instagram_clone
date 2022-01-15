@@ -37,7 +37,7 @@ class PostImageUploader < CarrierWave::Uploader::Base
   # For images you might use something like this:
   # 拡張子jpg、jpeg、gif、pngファイルを扱えるようにする
   def extension_allowlist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # Override the filename of the uploaded files:

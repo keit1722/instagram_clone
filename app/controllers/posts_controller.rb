@@ -32,7 +32,7 @@ class PostsController < ApplicationController
       render :edit
     end
   end
-  
+
   def show
     @post = Post.find(params[:id])
   end
