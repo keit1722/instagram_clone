@@ -36,6 +36,7 @@ gem 'slim-rails'
 gem 'redis-rails'
 gem 'rails-i18n'
 gem 'annotate'
+gem 'carrierwave'
 gem 'font-awesome-sass'
 
 # Reduces boot times through caching; required in config/boot.rb
