@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :require_login, only: %i[new create edit update delete]
+  before_action :require_login, only: %i[new create edit update destroy]
 
   def index
     @posts = Post.all
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   end
 
   private
-  
+
   def post_params
     params.require(:post).permit(:body, images: [])
   end
