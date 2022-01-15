@@ -32,7 +32,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy # 親モデルを削除する場合に紐づく子モデルを一緒に削除できるよう設定
 
   # ユーザーが自身の子モデルのオブジェクトかどうかをを判定するメソッド
-  def own(object)
+  def own?(object)
     id == object.user_id
   end
 end
