@@ -19,4 +19,8 @@
 #
 class Post < ApplicationRecord
   belongs_to :user
+  mount_uploaders :images, PostImageUploader # imageカラムとPostImageUploaderクラスを紐付け
+
+  validates :images, presence: true
+  validates :body, presence: true, length: { maximum: 1000 }
 end
