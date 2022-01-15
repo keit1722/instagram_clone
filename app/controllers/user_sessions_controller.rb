@@ -14,6 +14,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout # ログアウトするためのSorcery独自のメソッド
-    redirect_to root_path, success: 'ログアウトしました'
+    redirect_to login_path, success: 'ログアウトしました'
   end
 end
