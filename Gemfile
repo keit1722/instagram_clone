@@ -38,6 +38,7 @@ gem 'rails-i18n'
 gem 'annotate'
 gem 'carrierwave'
 gem 'font-awesome-sass'
+gem 'kaminari'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
