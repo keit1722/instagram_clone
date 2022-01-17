@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  root 'users#new'
+  # require_loginメソッドを用意したのでここで条件分岐は不要
+  root 'posts#index'
 
-  resources :users, only: %i[new create]
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
+  
+  resources :users, only: %i[new create]
+  resources :posts
 end
