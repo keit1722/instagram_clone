@@ -28,3 +28,5 @@
 
 vendor
 /config/database.yml
+
+/public/uploads
