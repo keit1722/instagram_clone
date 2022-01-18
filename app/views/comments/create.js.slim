@@ -1,0 +1,9 @@
+/ commentsコントローラーのcreateアクションでバリデーションに引っかかる場合とそうでない場合の非同期処理を実装
+- if @comment.errors.present?
+  / もしバリデーションに引っかかった場合、ブラウザのアラートにメッセージにエラーメッセージの後に開業を入れて表示する
+  | alert("#{@comment.errors.full_messages.join('\n')}");
+- else
+  / comment-boxクラスの中の一番上に新規コメントを追加する
+  | $('.comments-box').prepend("#{j render('comments/comment', comment: @comment)}");
+  / コメント入力欄を空欄にする
+  | $('.input-comment-body').val('');
