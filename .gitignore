@@ -30,3 +30,4 @@ vendor
 /config/database.yml
 
 /public/uploads
+dump.rdb
