@@ -37,7 +37,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     
     # コメントに関する変数を用意
-    @comments = @post.comments.order(created_at: :desc)
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
     @comment = Comment.new
   end
 
