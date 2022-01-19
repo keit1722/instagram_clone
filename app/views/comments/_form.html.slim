@@ -1,0 +1,4 @@
+/ form_withでlocal: true を指定していないのでAjax通信になる。commentsコントローラーのcreateアクション実行後にapp/views/comments/create.js.slimが実行される。
+= form_with model: [post, comment], class: 'd-flex mb-0 flex-nowrap justify-content-between' do |f|
+  = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'
+  = f.submit '投稿', class: 'btn btn-primary btn-raised'
