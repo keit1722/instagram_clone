@@ -1,0 +1,7 @@
+- if @comment.errors.present?
+  | alert("#{@comment.errors.full_messages.join('\n')}");
+- else
+  / もしコメント更新時にバリデーションにひっかからなかったらコメントの内容を書き換える
+  | $("#comment-#{@comment.id}").html("#{j render('comments/comment', comment: @comment)}");
+  / モーダルを閉じる
+  | $("#comment-edit-modal").modal('hide');

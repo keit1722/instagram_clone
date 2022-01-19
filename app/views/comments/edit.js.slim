@@ -1,0 +1,4 @@
+/ app/views/shared/_modal.html.slimの#modal-containerの内側にapp/views/comments/_modal_form.html.slimを呼び出す
+| $("#modal-container").html("#{escape_javascript(render 'modal_form', comment: @comment)}");
+/ モーダルを開く
+| $("#comment-edit-modal").modal('show');

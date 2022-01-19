@@ -30,6 +30,7 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
   has_many :posts, dependent: :destroy # 親モデルを削除する場合に紐づく子モデルを一緒に削除できるよう設定
+  has_many :comments, dependent: :destroy
 
   # ユーザーが自身の子モデルのオブジェクトかどうかをを判定するメソッド
   def own?(object)
