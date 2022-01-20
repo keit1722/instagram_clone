@@ -38,4 +38,19 @@ class User < ApplicationRecord
   def own?(object)
     id == object.user_id
   end
+
+  # 中間テーブルであるlikesテーブルに引数で渡されたpostを新たなレコードとして加える。Like.create!(post_id: post.id, user_id: post.user.id)と同じ意味。
+  def like(post)
+    like_posts << post
+  end
+
+  # like_postsから引数で渡されたpostを削除
+  def unlike(post)
+    like_posts.destroy(post)
+  end
+
+  # like_postsの中に引数で渡されたpostが含まれているか否かをbooleanで返す
+  def like?(post)
+    like_posts.include?(post)
+  end
 end
