@@ -31,6 +31,8 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy # 親モデルを削除する場合に紐づく子モデルを一緒に削除できるよう設定
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy # likeモデルと関連付け
+  has_many :like_posts, through: :likes, source: :post # likeしたpostを取得できる、like_postsという関連名で利用できる
 
   # ユーザーが自身の子モデルのオブジェクトかどうかをを判定するメソッド
   def own?(object)
