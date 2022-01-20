@@ -1,0 +1,8 @@
+/ いいねボタンのパーシャル
+div id="like_area-#{post.id}"
+  - if current_user.like?(post)
+    / いいねしている場合はapp/views/posts/_unlike.html.slimのパーシャルが表示
+    = render 'unlike', post: post
+    / いいねされていない場合はapp/views/posts/_like.html.slimのパーシャルが表示
+  - else
+    = render 'like', post: post
