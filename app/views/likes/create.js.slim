@@ -1,0 +1,2 @@
+/ id名like_area-#{@post.id}の入れ子になっている箇所をapp/views/posts/_unlike.html.slimのパーシャルへ変更
+| $('#like_area-#{@post.id}').html("#{j render('posts/unlike', post: @post)}")

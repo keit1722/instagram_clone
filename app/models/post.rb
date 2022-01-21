@@ -26,4 +26,8 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 1000 }
 
   has_many :comments, dependent: :destroy
+  # likeモデルと関連付け
+  has_many :likes, dependent: :destroy
+  # likeしたuserを取得できる、like_usersという関連名で利用できる
+  has_many :like_users, through: :likes, source: :user
 end
