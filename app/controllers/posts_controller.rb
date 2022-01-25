@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page]) #ページネーションを実装したいアクションにpageメソッドを定義
+    @random_users = User.randoms(5) # userモデルのインスタンスをランダムで5つ取得し@ramdom_usersに代入。ランダムで取得する処理はモデルに記述。
   end
 
   def new
@@ -35,7 +36,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    
+
     # コメントに関する変数を用意
     @comments = @post.comments.includes(:user).order(created_at: :desc)
     @comment = Comment.new

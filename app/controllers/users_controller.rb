@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.page(params[:page]) # ユーザモデルのインスタンスを取得、ページネーションを設定
+  end
+
   def new
     @user = User.new
   end

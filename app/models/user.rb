@@ -34,6 +34,8 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy # likeモデルと関連付け
   has_many :like_posts, through: :likes, source: :post # likeしたpostを取得できる、like_postsという関連名で利用できる
 
+  scope :randoms, -> (count) { order("RAND()").limit(count) } # インスタンスをランダムに並べてcountの数だけ取得して返す
+
   # ユーザーが自身の子モデルのオブジェクトかどうかをを判定するメソッド
   def own?(object)
     id == object.user_id

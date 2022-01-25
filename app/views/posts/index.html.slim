@@ -14,17 +14,8 @@
           .card-header
             | ユーザー
           .card-body
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー京介
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー寅泰
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミー常松
-            .user.mb-3
-              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
-              | ダミーまこと
+            / 登録されているユーザを5人ランダムで表示するよう変更
+            = render @random_users
           .card-footer
-            = link_to 'すべて見る', '#'
+            / user#indexへのリンク
+            = link_to 'すべて見る', users_path

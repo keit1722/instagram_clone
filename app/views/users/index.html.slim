@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-md-6.col-12.offset-md-3.mb-3
+      .card
+        .card-body
+          / app/views/users/_user.html.slimのパーシャルをuserインスタンスの数だけ表示
+          = render @users
+    .col-md-6.col-12.offset-md-3
+      / ページネーションを表示
+      = paginate @users
