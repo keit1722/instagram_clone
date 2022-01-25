@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
 
-  resources :users, only: %i[index new create]
+  resources :users, only: %i[index new create show]
 
   # :shallowオプションを指定するとedit・show・update・destroyのアクション（idを必要とするアクション）のエンドポイントとヘルパーメソッドがスッキリする（浅いネスト）
   resources :posts, shallow: true do
