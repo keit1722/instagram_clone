@@ -11,7 +11,7 @@ class PostsController < ApplicationController
       # ログインしていなければ全ての投稿を表示する（新しい順）
         Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
       end
-    @random_users = User.randoms(5) # userモデルのインスタンスをランダムで5つ取得し@ramdom_usersに代入。ランダムで取得する処理はモデルに記述。
+      @users = User.recent(5) # userモデルのインスタンスを新しい順で5つ取得し@usersに代入。新しい順で取得する処理はモデルに記述。
   end
 
   def new

@@ -38,7 +38,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed # フォローしているユーザーの集合を取得できるようactive_relationshipsメソッドを設定
   has_many :followers, through: :passive_relationships, source: :follower # フォローされているユーザーの集合を取得できるようpassive_relationshipsメソッドを設定
 
-  scope :randoms, -> (count) { order("RAND()").limit(count) } # インスタンスをランダムに並べてcountの数だけ取得して返す
+  scope :recent, ->(count) { order(created_at: :desc).limit(count) }# インスタンスを新規作成順に並べてcountの数だけ取得して返す
 
   # ユーザーが自身の子モデルのオブジェクトかどうかをを判定するメソッド
   def own?(object)

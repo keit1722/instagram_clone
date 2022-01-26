@@ -19,8 +19,8 @@
           .card-header
             | ユーザー
           .card-body
-            / 登録されているユーザを5人ランダムで表示するよう変更
-            = render @random_users
+            / 登録されているユーザを5人新規作成順で表示するよう変更
+            = render @users
           .card-footer
             / user#indexへのリンク
             = link_to 'すべて見る', users_path
