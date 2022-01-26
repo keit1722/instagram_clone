@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  # require_loginメソッドを用意したのでここで条件分岐は不要
-  root 'posts#index'
-
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
@@ -14,4 +11,12 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
+
+  # ログイン中とそうでないときで異なるルーティングを指定
+  constraints ->(request) { request.session[:user_id].present? } do
+    # ログインしてる時のルートパス
+    root 'posts#index'
+  end
+  # ログインしてない時のルートパス
+  root 'user_sessions#new'
 end
