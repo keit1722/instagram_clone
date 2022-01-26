@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.page(params[:page]) # ユーザモデルのインスタンスを取得、ページネーションを設定
+    @users = User.page(params[:page]).order(created_at: :desc) # ユーザモデルのインスタンスを取得、ページネーションを設定、新しいユーザから順に並び替え
   end
 
   def new

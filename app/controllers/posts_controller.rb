@@ -4,12 +4,12 @@ class PostsController < ApplicationController
   def index
 
     @posts =
-      # ログイン中のユーザであれば、フォロー中ユーザと自分の投稿のみ表示
+      # ログイン中のユーザであれば、フォロー中ユーザと自分の投稿のみ表示（新しい順）
       if current_user
-        current_user.feed.includes(:user).page(params[:page])
+        current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
       else
-      # ログインしていなければ全ての投稿を表示する
-        Post.all.includes(:user).page(params[:page])
+      # ログインしていなければ全ての投稿を表示する（新しい順）
+        Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
       end
     @random_users = User.randoms(5) # userモデルのインスタンスをランダムで5つ取得し@ramdom_usersに代入。ランダムで取得する処理はモデルに記述。
   end
