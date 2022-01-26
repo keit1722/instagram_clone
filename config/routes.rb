@@ -11,12 +11,4 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
-
-  # ログイン中とそうでないときで異なるルーティングを指定
-  constraints ->(request) { request.session[:user_id].present? } do
-    # ログインしてる時のルートパス
-    root 'posts#index'
-  end
-  # ログインしてない時のルートパス
-  root 'user_sessions#new'
 end
