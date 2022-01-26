@@ -2,16 +2,15 @@ class PostsController < ApplicationController
   before_action :require_login, only: %i[new create edit update destroy]
 
   def index
-
     @posts =
       # ログイン中のユーザであれば、フォロー中ユーザと自分の投稿のみ表示（新しい順）
       if current_user
         current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
       else
-      # ログインしていなければ全ての投稿を表示する（新しい順）
+        # ログインしていなければ全ての投稿を表示する（新しい順）
         Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
       end
-      @users = User.recent(5) # userモデルのインスタンスを新しい順で5つ取得し@usersに代入。新しい順で取得する処理はモデルに記述。
+    @users = User.recent(5) # userモデルのインスタンスを新しい順で5つ取得し@usersに代入。新しい順で取得する処理はモデルに記述。
   end
 
   def new
