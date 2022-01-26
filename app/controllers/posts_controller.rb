@@ -2,7 +2,15 @@ class PostsController < ApplicationController
   before_action :require_login, only: %i[new create edit update destroy]
 
   def index
-    @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page]) #ページネーションを実装したいアクションにpageメソッドを定義
+
+    @posts =
+      # ログイン中のユーザであれば、フォロー中ユーザと自分の投稿のみ表示
+      if current_user
+        current_user.feed.includes(:user).page(params[:page])
+      else
+      # ログインしていなければ全ての投稿を表示する
+        Post.all.includes(:user).page(params[:page])
+      end
     @random_users = User.randoms(5) # userモデルのインスタンスをランダムで5つ取得し@ramdom_usersに代入。ランダムで取得する処理はモデルに記述。
   end
 
