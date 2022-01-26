@@ -67,7 +67,7 @@ class User < ApplicationRecord
 
   # relationshipsテーブルから引数で受け取ったother_userを削除、結果的にアンフォローする
   def unfollow(other_user)
-    active_relationships.find_by(followed_id: other_user.id).destroy
+    following.delete(other_user)
   end
 
   # followingの中に引数で渡されたpostが含まれているか否かをbooleanで返す、フォローしているかどうかを調べる
