@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   # :shallowオプションを指定するとedit・show・update・destroyのアクション（idを必要とするアクション）のエンドポイントとヘルパーメソッドがスッキリする（浅いネスト）
   resources :posts, shallow: true do
+    collection { get :search } # postsコントローラーのsearchアクション、エンドポイントは /posts/search
     resources :comments
   end
   resources :likes, only: %i[create destroy]
