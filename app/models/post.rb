@@ -35,4 +35,12 @@ class Post < ApplicationRecord
 
   # 「Postモデルのインスタンス.body_contain」でbodyカラムから文字を検索できるスコープ
   scope :body_contain, ->(word) { where('posts.body LIKE ?', "%#{word}%") }
+
+  # 「Postモデルのインスタンス.comment_body_contain」でpostsテーブルにcommentsテーブルを結合、そのあとcommentsテーブルのbodyカラムから文字を検索できるスコープ
+  scope :comment_body_contain,
+        ->(word) { joins(:comments).where('comments.body LIKE ?', "%#{word}%") }
+
+  # 「Postモデルのインスタンス.username_contain」でpostsテーブルにusersテーブルを結合、そのあとusernameカラムから文字を検索できるスコープ
+  scope :username_contain,
+        ->(word) { joins(:user).where('username LIKE ?', "%#{word}%") }
 end
