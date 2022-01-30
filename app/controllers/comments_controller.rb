@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :require_login, only: %i[create edit update destroy]
-  
+
   def create
     @comment = current_user.comments.build(comment_params)
     @comment.save

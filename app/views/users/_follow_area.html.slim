@@ -1,0 +1,8 @@
+/ ログインしている場合のみ、なおかつ自分以外のユーザのみ表示される
+- if logged_in? && current_user.id != user.id
+  div id="follow-area-#{user.id}"
+    / 既にフォローしているか否かで表示するパーシャルを変更
+    - if current_user.following?(user)
+      = render 'users/unfollow', user: user
+    - else
+      = render 'users/follow', user: user
