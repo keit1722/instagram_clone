@@ -33,6 +33,12 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy # likeモデルと関連付け
   has_many :like_posts, through: :likes, source: :post # likeしたpostを取得できる、like_postsという関連名で利用できる
+  has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy # relationshipsへの関連名をactive_relationshipsとして宣言、外部キーをfollower_idに設定
+  has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy # relationshipsへの関連名をpassive_relationshipsとして宣言、外部キーをfollowed_idに設定
+  has_many :following, through: :active_relationships, source: :followed # フォローしているユーザーの集合を取得できるようactive_relationshipsメソッドを設定
+  has_many :followers, through: :passive_relationships, source: :follower # フォローされているユーザーの集合を取得できるようpassive_relationshipsメソッドを設定
+
+  scope :recent, ->(count) { order(created_at: :desc).limit(count) } # インスタンスを新規作成順に並べてcountの数だけ取得して返す
 
   # ユーザーが自身の子モデルのオブジェクトかどうかをを判定するメソッド
   def own?(object)
@@ -52,5 +58,25 @@ class User < ApplicationRecord
   # like_postsの中に引数で渡されたpostが含まれているか否かをbooleanで返す
   def like?(post)
     like_posts.include?(post)
+  end
+
+  # フォローしているユーザの集合に引数で受け取ったother_userを加える
+  def follow(other_user)
+    following << other_user
+  end
+
+  # relationshipsテーブルから引数で受け取ったother_userを削除、結果的にアンフォローする
+  def unfollow(other_user)
+    following.destroy(other_user)
+  end
+
+  # followingの中に引数で渡されたpostが含まれているか否かをbooleanで返す、フォローしているかどうかを調べる
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  # フォローしているユーザーのidと自身のidの投稿の一覧を取得して返している
+  def feed
+    Post.where(user_id: following_ids << id)
   end
 end
