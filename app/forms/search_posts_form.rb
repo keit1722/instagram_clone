@@ -2,6 +2,7 @@ class SearchPostsForm
   include ActiveModel::Model # Active Recordの書き方が使える
   include ActiveModel::Attributes # この記述によりデータ型を指定
 
+  attribute :body, :string
   attribute :comment_body, :string
   attribute :username, :string
 
