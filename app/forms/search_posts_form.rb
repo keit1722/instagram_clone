@@ -21,4 +21,5 @@ class SearchPostsForm
   def splited_bodies
     # 前後の空白をなくし、文字列の間にある空白ごとに分けて配列にしている
     body.strip.split(/[[:blank:]]+/)
+  end
 end
