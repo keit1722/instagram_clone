@@ -22,6 +22,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  mount_uploader :avatar, AvatarUploader # avatarカラムとAvatarUploaderクラスを紐付け
+
   validates :username, uniqueness: true, presence: true
   validates :email, uniqueness: true, presence: true
 
