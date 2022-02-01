@@ -13,5 +13,10 @@ Rails.application.routes.draw do
   resources :likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
 
+  # /mypage/account/〜となるようにルーティング設定
+  namespace :mypage do
+    resource :account, only: %i[edit update]
+  end
+
   root 'posts#index'
 end
