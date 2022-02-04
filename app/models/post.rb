@@ -33,6 +33,9 @@ class Post < ApplicationRecord
   # likeしたuserを取得できる、like_usersという関連名で利用できる
   has_many :like_users, through: :likes, source: :user
 
+  # ポリモーフィック関連づけ
+  has_one :activity, as: :subject, dependent: :destroy
+
   # 「Postモデルのインスタンス.body_contain」でbodyカラムから文字を検索できるスコープ
   scope :body_contain, ->(word) { where('posts.body LIKE ?', "%#{word}%") }
 

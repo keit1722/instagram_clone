@@ -17,6 +17,7 @@
 class Relationship < ApplicationRecord
   belongs_to :follower, class_name: 'User' # userモデルに関連付け、外部キーはfollower_id
   belongs_to :followed, class_name: 'User' # userモデルに関連付け、外部キーはfollowed_id
+  has_one :activity, as: :subject, dependent: :destroy # ポリモーフィック関連づけ
   validates :follower_id, presence: true
   validates :followed_id, presence: true
   validates :follower_id, uniqueness: { scope: :followed_id } # follower_idとfollowed_idの組み合わせに一意性制約のバリデーションをかける

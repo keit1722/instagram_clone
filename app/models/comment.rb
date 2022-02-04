@@ -22,6 +22,7 @@
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :post
+  has_one :activity, as: :subject, dependent: :destroy # ポリモーフィック関連づけ
 
   validates :body, presence: true, length: { maximum: 1000 } # コメント文字数が1000文字を超えるとバリデーションに引っかかるよう設定
 end

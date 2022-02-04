@@ -22,6 +22,7 @@
 class Like < ApplicationRecord
   belongs_to :user
   belongs_to :post
+  has_one :activity, as: :subject, dependent: :destroy # ポリモーフィック関連づけ
 
   # 同じuser_idとpost_idの組み合わせが重複して登録できないバリデーション
   validates :user_id, uniqueness: { scope: :post_id }
