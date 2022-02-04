@@ -23,4 +23,7 @@
 class Activity < ApplicationRecord
   belongs_to :subject, polymorphic: true # ポリモーフィック関連付け
   belongs_to :user # userモデルに関連づけ
+
+  # action_typeカラムで利用できるenumを定義
+  enum action_type: { commented_to_own_post: 0, liked_to_own_post: 1, followed_me: 2 }
 end
