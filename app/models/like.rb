@@ -26,4 +26,12 @@ class Like < ApplicationRecord
 
   # 同じuser_idとpost_idの組み合わせが重複して登録できないバリデーション
   validates :user_id, uniqueness: { scope: :post_id }
+
+  after_create_commit :create_activities # コールバックを用いてLikeのレコードが作られたときにcreate_activitiesメソッドを呼び出す。つまり、いいねをされたらActivityのレコードも作られる。
+
+  private
+
+  def create_activities
+    Activity.create(subject: self, user: post.user, action_type: :liked_to_own_post)
+  end
 end

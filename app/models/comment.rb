@@ -25,4 +25,12 @@ class Comment < ApplicationRecord
   has_one :activity, as: :subject, dependent: :destroy # ポリモーフィック関連づけ
 
   validates :body, presence: true, length: { maximum: 1000 } # コメント文字数が1000文字を超えるとバリデーションに引っかかるよう設定
+
+  after_create_commit :create_activities # コールバックを用いてCommentのレコードが作られたときにcreate_activitiesメソッドを呼び出す。つまり、コメントされたらActivityのレコードも作られる。
+
+  private
+
+  def create_activities
+    Activity.create(subject: self, user: post.user, action_type: :commented_to_own_post)
+  end
 end
