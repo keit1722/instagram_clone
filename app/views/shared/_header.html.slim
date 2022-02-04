@@ -14,6 +14,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-white
           / ドロップダウンメニューのボタン。data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"などを属性はドロップダウンメニューのために必要。
           a#dropdownMenuButton.nav-link.position-relative href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
             = icon 'far', 'heart', class: 'fa-lg'
+            / app/views/shared/_unread_badge.html.slimのパーシャル
+            = render 'shared/unread_badge'
           / ドロップダウンメニューで表示されるメニュー部分。aria-labelledby="dropdownMenuButton"の属性はドロップダウンメニューのために必要。
           #header-activities.dropdown-menu.dropdown-menu-right.m-0.p-0 aria-labelledby="dropdownMenuButton"
             / app/views/shared/_header_activities.html.slimのパーシャルを埋め込み
