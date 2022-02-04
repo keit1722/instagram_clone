@@ -1,8 +1,12 @@
 - if current_user.activities.present?
   / カレントユーザ宛に通がある場合の処理
-  - current_user.activities.each do |activity|
+  / recentスコープにより10件の通知を降順で表示
+  - current_user.activities.recent(10).each do |activity|
     / activityモデルのaction_typeカラムの中身によって埋め込むパーシャルを変更している。
     = render "shared/#{activity.action_type}", activity: activity
+  / 通知が10件以上ある場合は通知一覧ページへのリンクを表示
+  - if current_user.activities.count > 10
+    = link_to 'すべてみる', mypage_activities_path, class: 'dropdown-item justify-content-center'
 - else
   / カレントユーザ宛に通がない場合の処理
   .dropdown-item
