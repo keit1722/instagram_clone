@@ -1,0 +1,9 @@
+- if current_user.activities.present?
+  / カレントユーザ宛に通がある場合の処理
+  - current_user.activities.each do |activity|
+    / activityモデルのaction_typeカラムの中身によって埋め込むパーシャルを変更している。
+    = render "shared/#{activity.action_type}", activity: activity
+- else
+  / カレントユーザ宛に通がない場合の処理
+  .dropdown-item
+    | お知らせはありません
