@@ -1,0 +1,4 @@
+/ フォローされたときに送信するメールテンプレート
+h2 = "#{@user_to.username}さん"
+p = "#{@user_from.username}さんがあなたをフォローしました。"
+= link_to "確認する", user_url(@user_from)

@@ -3,7 +3,16 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.build(comment_params)
-    @comment.save
+    if @comment.save
+      # コメントされたら以下の処理を実行
+      UserMailer.with(
+        # mialerには以下の引数を渡している
+        user_from: current_user,
+        user_to: @comment.post.user,
+        comment: @comment,
+      ).comment_post # user_mailer.rbのcomment_postメソッドを実行
+        .deliver_later # 非同期でメールを送信
+    end
   end
 
   def edit
