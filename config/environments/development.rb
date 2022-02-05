@@ -61,4 +61,9 @@ Rails.application.configure do
 
   # redisのssssion保存先の設定
   config.session_store :redis_store, { servers: 'redis://localhost:6379', expire_after: 1.day }
+
+  # 送信メールプレビューのURLを設定はSettings.default_url_optionsはconfigのgemに設定した定数で、それをハッシュ化して渡している。
+  config.action_mailer.default_url_options = Settings.default_url_options.to_h
+  # letter_opener_webの設定
+  config.action_mailer.delivery_method = :letter_opener_web
 end
