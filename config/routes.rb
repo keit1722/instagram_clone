@@ -12,10 +12,14 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
+  resources :activities, only: [] do # only: に空配列を指定することで /activities/:id/read というエンドポイントのみ作成している
+    patch :read, on: :member # member do patch :read end と同じ意味
+  end
 
   # /mypage/account/〜となるようにルーティング設定
   namespace :mypage do
     resource :account, only: %i[edit update]
+    resources :activities, only: %i[index]
   end
 
   root 'posts#index'

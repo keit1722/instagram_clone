@@ -40,6 +40,7 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy # relationshipsへの関連名をpassive_relationshipsとして宣言、外部キーをfollowed_idに設定
   has_many :following, through: :active_relationships, source: :followed # フォローしているユーザーの集合を取得できるようactive_relationshipsメソッドを設定
   has_many :followers, through: :passive_relationships, source: :follower # フォローされているユーザーの集合を取得できるようpassive_relationshipsメソッドを設定
+  has_many :activities, dependent: :destroy # activityモデルに関連づけ
 
   scope :recent, ->(count) { order(created_at: :desc).limit(count) } # インスタンスを新規作成順に並べてcountの数だけ取得して返す
 

@@ -1,0 +1,13 @@
+- if @activities.present?
+  / 通知がある場合の処置
+  / 通知一覧を表示
+  - @activities.each do |activity|
+    / 通知の種類によって表示するバーシャルを変更
+    = render "#{activity.action_type}", activity: activity
+  - if @activities
+    .mt-3
+      = paginate @activities
+- else
+  / 通知がない場合の処置
+  .text-center
+    | お知らせはありません

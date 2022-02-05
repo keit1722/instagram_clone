@@ -1,0 +1,12 @@
+/ フォローされた場合の通知のパーシャル
+/ activitiesコントローラーのreadアクションを実行するリンク、通知が既読であればclassにreadを付ける
+= link_to read_activity_path(activity), class: "dropdown-item border-bottom #{'read' if activity.read?}", method: :patch do
+  / コメントしたユーザのアバターを表示
+  = image_tag activity.subject.follower.avatar.url, class: 'rounded-circle mr-1', size: '30x30'
+  object
+    / フォローしてきたユーザの詳細ページへのリンク
+    = link_to activity.subject.follower.username, user_path(activity.subject.follower)
+  | があなたをフォローしました
+  .text-right
+    / 通知があった時間を表示
+    = l activity.created_at, format: :short
