@@ -1,0 +1,17 @@
+/ 通知設定更新甩のフォーム
+= form_with model: @user, url: mypage_notification_setting_path, method: :patch, local: true do |f|
+  = render 'shared/error_messages', object: f.object
+    / チェックボックスにチェックを入れると1、外すと0を送る。それぞれのカラムはboolean型なのでそれぞれtrueかfalseになる。
+  .form-group
+    = f.check_box :notification_on_comment
+    = f.label :notification_on_comment
+
+  .form-group
+    = f.check_box :notification_on_like
+    = f.label :notification_on_like
+
+  .form-group
+    = f.check_box :notification_on_follow
+    = f.label :notification_on_follow
+
+  = f.submit class: 'btn btn-primary btn-raised'
