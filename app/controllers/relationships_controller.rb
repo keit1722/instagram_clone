@@ -2,8 +2,8 @@ class RelationshipsController < ApplicationController
   before_action :require_login, only: %i[create destroy] # アクションを実行する前にログインが必要
   def create
     @user = User.find(params[:followed_id]) # フォローされる対象のユーザを取得
-    if current_user.follow(@user)
-      # フォローされたら以下の処理を実行
+    if current_user.follow(@user) && @user.notification_on_follow?
+      # フォローされ、、なおかつ通知をONにしている場合に以下の処理を実行
       UserMailer.with(
         # mialerには以下の引数を渡している
         user_from: current_user,
