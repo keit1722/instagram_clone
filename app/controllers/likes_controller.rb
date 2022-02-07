@@ -3,8 +3,8 @@ class LikesController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    if current_user.like(@post)
-      # いいねされたら以下の処理を実行
+    if current_user.like(@post) && @post.user.notification_on_like?
+      # いいねされ、なおかつ通知をONにしている場合に以下の処理を実行
       UserMailer.with(
         # mialerには以下の引数を渡している
         user_from: current_user,

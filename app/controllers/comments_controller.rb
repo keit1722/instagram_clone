@@ -3,8 +3,8 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.build(comment_params)
-    if @comment.save
-      # コメントされたら以下の処理を実行
+    if @comment.save && @comment.post.user.notification_on_comment?
+      # コメントされ、なおかつ通知をONにしている場合に以下の処理を実行
       UserMailer.with(
         # mialerには以下の引数を渡している
         user_from: current_user,
