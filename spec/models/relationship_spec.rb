@@ -19,9 +19,8 @@ RSpec.describe Relationship, type: :model do
 
   describe 'コールバック' do
     describe 'after_create_commit' do
-      let(:relationship) { create(:relationship) }
       it 'Activityモデルのインスタンスが作成される' do
-        expect { relationship }.to change { Activity.count }.by(1)
+        expect { create(:relationship) }.to change { Activity.count }.by(1)
       end
     end
   end
