@@ -121,4 +121,33 @@ RSpec.describe 'ポスト', type: :system do
       expect(current_path).to eq post_path(post_by_user) # 移動したページのエンドポイントがpost_path(post_by_user)と同じであればテスト成功
     end
   end
+
+  describe 'いいね' do
+    let!(:user) { create(:user) }
+    let!(:post) { create(:post) }
+    before do
+      login_as user
+      user.follow(post.user)
+    end
+    it 'いいねができること' do
+      visit posts_path
+      expect {
+        within "#post-#{post.id}" do
+          find('.like-button').click # class="like-button"のエレメントをクリック
+          expect(page).to have_css '.unlike-button' # class="unlike-button"のエレメントが表示されていれば成功
+        end
+      }.to change(user.like_posts, :count).by(1) # いいねの数が増えていればテスト成功
+    end
+
+    it 'いいねを取り消せること' do
+      user.like(post)
+      visit posts_path
+      expect {
+        within "#post-#{post.id}" do
+          find('.unlike-button').click # class="unlike-button"のエレメントをクリック
+          expect(page).to have_css '.like-button' # class="like-button"のエレメントが表示されていれば成功
+        end
+      }.to change(user.like_posts, :count).by(-1) # いいねの数が減っていればテスト成功
+    end
+  end
 end
