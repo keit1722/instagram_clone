@@ -37,4 +37,26 @@ RSpec.describe 'ユーザー登録', type: :system do
       end
     end
   end
+
+  describe 'フォロー' do
+    let!(:login_user) { create(:user) }
+    let!(:other_user) { create(:user) }
+
+    before { login_as login_user }
+    it 'フォローができること' do
+      visit user_path(other_user) # other_userの詳細ページへログイン
+      expect {
+        click_link 'フォロー' # フォローボタンをクリック
+        expect(page).to have_content 'アンフォロー' # アンフォローという表示があればテスト成功
+      }.to change(login_user.following, :count).by(1) # フォローしている数が減ればテスト成功
+    end
+
+    it 'フォローを外せること' do
+      visit user_path(other_user)
+      expect {
+        click_link 'アンフォロー' # アンフォローボタンをクリック
+        expect(page).to have_content 'フォロー' # フォローという表示があればテスト成功
+      }.to change(login_user.following, :count).by(-1) # フォローしている数が増えればテスト成功
+    end
+  end
 end
