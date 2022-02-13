@@ -24,8 +24,8 @@ RSpec.describe 'ポスト', type: :system do
     context 'ログインしていない場合' do
       it '全てのポストが表示されること' do
         visit posts_path
-        expect(page).to have_content post_1_by_others.body # post_1_by_others（フォローしていないユーザの投稿）が表示されていなければテスト成功
-        expect(page).to have_content post_2_by_others.body # post_2_by_others（フォローしていないユーザの投稿）が表示されていなければテスト成功
+        expect(page).to have_content post_1_by_others.body # post_1_by_others（フォローしていないユーザの投稿）が表示されていればテスト成功
+        expect(page).to have_content post_2_by_others.body # post_2_by_others（フォローしていないユーザの投稿）が表示されていればテスト成功
         expect(page).to have_content post_by_user.body # 自分の投稿が表示されていればテスト成功
       end
     end
